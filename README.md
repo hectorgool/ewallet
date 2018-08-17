@@ -60,3 +60,17 @@ Dentro de la carpeta ewallet se encuentra el archivo db.sql, para cargar las bas
 ```sh
 $ mysql -u root -p -v < db.sql
 ```
+
+
+### Instalación de Cors
+En el archivo Gemfile agregar al final la siguiente gema:
+
+```ruby
+gem 'rack-cors', '~> 1.0', '>= 1.0.2'
+```
+En la terminal ejecuar el siguiente comando:
+```sh
+bundle install
+```
+rack-cors: https://rubygems.org/gems/rack-cors
+
