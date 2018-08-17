@@ -5,4 +5,5 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_one :wallet
+  #has_one :transfer, through: :wallet #add this
 end
