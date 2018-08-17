@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_17_180056) do
+ActiveRecord::Schema.define(version: 2018_08_17_180502) do
+
+  create_table "commissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "transfer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transfer_id"], name: "index_commissions_on_transfer_id"
+  end
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -46,6 +53,7 @@ ActiveRecord::Schema.define(version: 2018_08_17_180056) do
     t.index ["customer_id"], name: "index_wallets_on_customer_id"
   end
 
+  add_foreign_key "commissions", "transfers"
   add_foreign_key "transfers", "wallets"
   add_foreign_key "wallets", "customers"
 end
