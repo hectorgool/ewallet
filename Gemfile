@@ -47,3 +47,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rack-cors', '~> 1.0', '>= 1.0.2'
 
 gem 'devise', '~> 4.2'
+
+gem 'simple_token_authentication', '~> 1.15', '>= 1.15.1'
