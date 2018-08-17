@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_17_020848) do
+ActiveRecord::Schema.define(version: 2018_08_17_021733) do
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 2018_08_17_020848) do
     t.decimal "saldo", precision: 16, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_wallets_on_customer_id"
   end
 
+  add_foreign_key "wallets", "customers"
 end
