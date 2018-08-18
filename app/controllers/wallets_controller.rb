@@ -25,17 +25,19 @@ class WalletsController < ApplicationController
       # se valida que en el origen existan fodos suficientes(mayores a la catidad que se quiere depositar) 
       if ingresos_origen_menos_comision > abono
 
+        comisiones = calcular_comisiones(ingresos_origen)
+        #puts "\nCOMISIONES >>> #{comisiones}\n"
+        gastos = abono + comisiones
+
         # se calcula ingresos de la cuenta origen depues de restar las comisiones por la transacción
         deposito_origen = restar_comisiones(ingresos_origen) - abono
-        @origen.wallet.update_attribute(:ingresos, deposito_origen)
+        #@origen.wallet.update_attribute(:ingresos, deposito_origen)
+        @origen.wallet.update(:ingresos => deposito_origen, :gastos => gastos)
 
         @destino = Customer.joins(:wallet).where(:email => params[:wallet][:destino]).first
         # se calcula ingresos de la cuenta destion despues de agregar el abono
         deposito_destino = abono + @destino.wallet.ingresos
         @destino.wallet.update_attribute(:ingresos, deposito_destino)
-
-        comisiones = calcular_comisiones(ingresos_origen)
-        #puts "\nCOMISIONES >>> #{comisiones}\n"
 
         render json: @origen.wallet, status: :created
 
