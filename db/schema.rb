@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2018_08_17_180502) do
 
   create_table "transfers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "wallet_id"
+    t.decimal "tr_cantidad", precision: 16, scale: 2, default: "0.0"
+    t.integer "enviado_a"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["wallet_id"], name: "index_transfers_on_wallet_id"

@@ -39,7 +39,7 @@ Se configuran las siguientes variables en el archivo, config/database.yml, para 
 ```
 ### Configuración de la base de datos MySQL
 
-Las siguientes instrucciones son para crear las bases de datos los ambientes de desarrollo, prueba y producción así como el usuario de la bases de datos y los respectivos permisos (toas estas instrucciones están dentro del archivo db.sql)
+Las siguientes instrucciones son para crear las bases de datos los ambientes de desarrollo, prueba y producción así como el usuario de la bases de datos y los respectivos permisos
 
 ```sql
 DROP DATABASE IF EXISTS `ewallet_development`;
@@ -61,16 +61,17 @@ Dentro de la carpeta ewallet se encuentra el archivo db.sql, para cargar las bas
 $ mysql -u root -p -v < db.sql
 ```
 
-
-### Instalación de Cors
-En el archivo Gemfile agregar al final la siguiente gema:
-
-```ruby
-gem 'rack-cors', '~> 1.0', '>= 1.0.2'
-```
-En la terminal ejecuar el siguiente comando:
+En la terminal ejecutar los siguientes comandos:
 ```sh
 bundle install
+rails db:migrate
+rails db:seed
 ```
-rack-cors: https://rubygems.org/gems/rack-cors
+### Tabla para identificar las entidades
+
+![Diagrama entidad relación](https://i.imgur.com/twWjOH7.png)
+
+### Digrama Entidad Relación
+![Diagrama entidad relación](https://i.imgur.com/uUPKnIm.png)
+
 

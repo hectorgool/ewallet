@@ -6,7 +6,7 @@ class WalletsController < ApplicationController
   #end
 
   def show
-    render json: @transfer
+    render json: @wallet
   end
 
   #def new
@@ -39,6 +39,7 @@ class WalletsController < ApplicationController
         deposito_destino = abono + @destino.wallet.ingresos
         @destino.wallet.update_attribute(:ingresos, deposito_destino)
 
+
         render json: @origen.wallet, status: :created
 
       else
@@ -63,7 +64,7 @@ class WalletsController < ApplicationController
   private
 
   def set_wallet
-    @wallet = wallet.find(params[:id])
+    @wallet = Wallet.find(params[:id])
   end
 
   def transfer_params
