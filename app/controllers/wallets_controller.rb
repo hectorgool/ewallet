@@ -35,7 +35,9 @@ class WalletsController < ApplicationController
         @destino.wallet.update_attribute(:saldo, deposito_destino)
 
         comisiones = calcular_comisiones(saldo_origen)
-        puts "\nCOMISIONES >>> #{comisiones}\n"
+        #puts "\nCOMISIONES >>> #{comisiones}\n"
+
+        render json: @origen.wallet, status: :created
 
       else
         render :json => '{"error": "fondos insuficientes"}'
