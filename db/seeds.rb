@@ -9,10 +9,10 @@
 # rails db:seed
 unless Customer.exists?(email: "hectorgool@gmail.com")
   customer = Customer.create!(email: "hectorgool@gmail.com", password: "asdfasdf")
-  Wallet.create!(customer_id: customer.id, saldo: "1000.00")
+  Wallet.create!(customer_id: customer.id, ingresos: "1000.00")
 end
 
 unless Customer.exists?(email: "hgo280377@hotmail.com")
   customer = Customer.create!(email: "hgo280377@hotmail.com", password: "asdfasdf")
-  Wallet.create!(customer_id: customer.id, saldo: "100.00")
+  Wallet.create!(customer_id: customer.id, ingresos: "100.00")
 end

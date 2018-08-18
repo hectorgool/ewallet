@@ -19,22 +19,22 @@ class WalletsController < ApplicationController
       @origen = Customer.joins(:wallet).where(:email => 'hectorgool@gmail.com').first
 
       abono = params[:wallet][:abono].to_f
-      saldo_origen = @origen.wallet.saldo
-      saldo_origen_menos_comision = restar_comisiones(saldo_origen)
+      ingresos_origen = @origen.wallet.ingresos
+      ingresos_origen_menos_comision = restar_comisiones(ingresos_origen)
 
       # se valida que en el origen existan fodos suficientes(mayores a la catidad que se quiere depositar) 
-      if saldo_origen_menos_comision > abono
+      if ingresos_origen_menos_comision > abono
 
-        # se calcula saldo de la cuenta origen depues de restar las comisiones por la transacción
-        deposito_origen = restar_comisiones(saldo_origen) - abono
-        @origen.wallet.update_attribute(:saldo, deposito_origen)
+        # se calcula ingresos de la cuenta origen depues de restar las comisiones por la transacción
+        deposito_origen = restar_comisiones(ingresos_origen) - abono
+        @origen.wallet.update_attribute(:ingresos, deposito_origen)
 
         @destino = Customer.joins(:wallet).where(:email => params[:wallet][:destino]).first
-        # se calcula saldo de la cuenta destion despues de agregar el abono
-        deposito_destino = abono + @destino.wallet.saldo
-        @destino.wallet.update_attribute(:saldo, deposito_destino)
+        # se calcula ingresos de la cuenta destion despues de agregar el abono
+        deposito_destino = abono + @destino.wallet.ingresos
+        @destino.wallet.update_attribute(:ingresos, deposito_destino)
 
-        comisiones = calcular_comisiones(saldo_origen)
+        comisiones = calcular_comisiones(ingresos_origen)
         #puts "\nCOMISIONES >>> #{comisiones}\n"
 
         render json: @origen.wallet, status: :created
@@ -65,7 +65,7 @@ class WalletsController < ApplicationController
   end
 
   def transfer_params
-    params.require(:transfer).permit(:saldo, :customer_id, :created_at, :updated_at)
+    params.require(:transfer).permit(:ingresos, :customer_id, :created_at, :updated_at)
   end
 
   def calcular_comisiones(cantidad = 0.00)

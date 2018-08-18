@@ -46,7 +46,8 @@ ActiveRecord::Schema.define(version: 2018_08_17_180502) do
   end
 
   create_table "wallets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.decimal "saldo", precision: 16, scale: 2
+    t.decimal "ingresos", precision: 16, scale: 2, default: "0.0"
+    t.decimal "gastos", precision: 16, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
