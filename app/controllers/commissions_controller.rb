@@ -1,4 +1,7 @@
 class CommissionsController < ApplicationController
+  
+  before_action :set_transfer
+  
   def index
   end
 
@@ -19,4 +22,11 @@ class CommissionsController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  def set_transfer
+    @transfer = Transfer.find(params[:transfer_id])
+  end
+
 end
